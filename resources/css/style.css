@@ -1,0 +1,36 @@
+ol{
+    background-color: transparent;
+
+}
+
+@keyframes example2 {
+    from { background: linear-gradient(red, yellow, green);}
+    to {background: radial-gradient(ellipse, white, gold, transparent);}
+}
+
+.navigation{
+    font-family: Leelawadee;
+    transition: width 2s;
+    animation-name: example;
+    animation-duration: 1s;
+    animation-delay: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.navigation:hover {
+    width: 300px;
+}
+
+@keyframes example {
+    from { background: linear-gradient(20deg, purple, white);}
+    to {background: linear-gradient(40deg, black, lightgoldenrodyellow);}
+}
+body{
+    margin: auto;
+    border: dashed;
+    animation-name: example;
+    animation-duration: 2s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}

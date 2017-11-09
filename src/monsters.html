@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monsters Here</title>
+    <script>
+        function lol(){
+        var w = window.open('vampires.html');
+        w.onload = function(){
+            var p = document.getElementById("1");
+            var p_prime = p.cloneNode(true);
+            w.document.body.appendChild(p_prime);
+        };
+        }
+    </script>
+</head>
+<body>
+  Here is a monster for you
+  <img src="../resources/img/monster.jpg" alt="Mountain View" width="500" height="377">
+  <br />
+  See more :
+  <br />
+  <ol class="navigation" >
+      <li><a href="monsters.html">Monsters</a></li>
+      <li><a href="vampires.html">Vampires</a></li>
+      <li><a href="capitalists.html">Capitalists</a></li>
+  </ol>
+
+
+
+</body>
+</html>
