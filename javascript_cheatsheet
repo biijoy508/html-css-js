@@ -1,0 +1,29 @@
+ECMAScript is the name used by the language specification.ECMAScript is the official name for JavaScript.  ECMAScript 6 is currently being developed.
+
+A single equals sign (=) is used to assign a value to a variable.
+A triple equals sign (===) is used to compare two values
+Declares (creates) a variable foo: var foo;
+Assigning variable value: foo = 4; var lul = 5;
+Compound assignment: x += 1;
+JavaScript has two different ways to do if-then-else
+    1. statement var x;
+       if (y >= 0) {
+          x = y;
+          } else {
+          x = -y;
+          }
+    2. expression var x = y >= 0 ? y : -y;
+ Using expression as method parameter: myFunction(y >= 0 ? y : -y)
+ semicolon: var l = 8; var z = function(){};
+ Comments: single line : x++; // single-line comment
+           multiline: /* This is
+                         a multiline
+                         comment.
+                      */
+ words should not be variable name: arguments break case catch class const continue debugger 
+ default delete do else enum export extends false finally for function if implements
+ import in instanceof interface let new null package private protected public return
+ static super switch this throw true try typeof var void while Infinity NaN undefined
+ 
+ value.propKey => var str = 'abc'; str.length;  eller 'abc'.length;
+ 
