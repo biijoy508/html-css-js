@@ -1,9 +1,31 @@
 ECMAScript is the name used by the language specification.ECMAScript is the official name for JavaScript.  ECMAScript 6 is currently being developed.
 Primitive values are booleans, numbers, strings, null, and undefined.
 All other values are objects
+  Booleans can be objects (if defined with the new keyword)
+  Numbers can be objects (if defined with the new keyword)
+  Strings can be objects (if defined with the new keyword)
+  Dates are always objects
+  Maths are always objects
+  Regular expressions are always objects
+  Arrays are always objects
+  Functions are always objects
+  Objects are always objects
+  
+  function person(first, last, age, eye) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+var myFather = new person("John", "Doe", 50, "blue");
+prototype: person.prototype.nationality = "English"; // adding a new property to constructor
+
+two object with same parameter and values are not same, one object is only equal to itself. 
+two primitive type with same value is equal to each other 
 
 All numbers in JavaScript are floating-point. error in number is either a NaN or infinity. 
  >isNumber(''xyz)= NaN , > 3/0= infinity , >Math.pow(2,1024) = infinity (number too large)
+The global object Math (see Math) provides more arithmetic operations, via functions.
 
 undefined means “no value.” Uninitialized variables are undefined: var foo; 
                             Missing parameters are undefined: function f(x) { return x }
@@ -13,11 +35,6 @@ undefined means “no value.” Uninitialized variables are undefined: var foo;
 null means “no object.” It is used as a nonvalue whenever an object is expected (parameters, last in a chain of objects, etc.).
 Best way to check for undefined, null, false, 0, NaN, '' is if(!x) where x is a variable. All these 6 cases returns false. 
  
-two object with same parameter and values are not same, one object is only equal to itself. 
-two primitive type with same value is equal to each other 
-double equals will perform a type conversion when comparing two things;
-triple equals will do the same comparison without type conversion (by simply always returning false if the types differ);
-
 A single equals sign (=) is used to assign a value to a variable.
 double equals(==) will perform a type conversion when comparing two things;
 A triple equals sign (===) compare without type conversion (by simply always returning false if the types differ);
@@ -58,6 +75,83 @@ JavaScript has two different ways to do if-then-else
      > [] instanceof Object : true
      > undefined instanceof Object : false
      > null instanceof Object :false
+     
+ backslash (\) escapes characters: "Did she say \"Hello\"?" ; 'That\'s nice!';
+ > var str = 'abc';  >str[1] -> output: b
+ > 'You have ' + messageCount + '\n messages'
+ > var str = 'u'; str+= 'suck'; -> 'u suck'
+ > 'abc'.length = 3 , 
+ > 'abc'.slice(1,2) 
+ > '\t xyz  '.trim()  // trim whitespace
+ > 'mjölnir'.toUpperCase(): 'MJÖLNIR'
+ > 'abc'.indexOf('b') = 1 ; 'abc'.indexOf('w') = -1 ****
+ 
+ if (myvar === 0) {
+    // then
+} else if (myvar === 1) {
+    // else-if
+} else {
+    // else
+}
+
+switch (fruit) {
+    case 'banana': ** case uses === same type same value, no type conversion
+        // ...
+        break;
+    case 'apple':
+        // ...
+        break;
+    default:  // all other cases
+        // ...
+}
+
+for,for ...in, while, do...while are loops, 
+   break leaves the loop.
+   continue starts a new loop iteration.
+
+Hoisting: a variable/method can be used before it has been declared. X=5; var X; but if we assign a method to a var , we can not 
+hoist
+Strict mode: disable hoisting
+
+we can do wonderful things to the property of an object, like write only, read only, customise getter , setter. 
+  >var obj = {};
+   Object.defineProperty(obj, "x", {value:0, writable:false});
+   obj.x;
+   >var obj = {}; var bValue = 30; 
+   Object.defineProperty(obj, 'lul', 
+           {
+            get: function() { return bValue; },
+            set: function(newValue) { bValue = newValue; },
+            enumerable: false,   /*The enumerable property attribute defines whether 
+                                   the property shows up in a for...in loop and Object.keys() or not.*/
+            configurable: false, /*The configurable attribute controls at the same time 
+                                   whether the property can be deleted from the object and whether its 
+                                   attributes (other than writable to false) can be changed.*/
+            writable: false,
+            value: 'despacito' //any value
+           });
+    object.prototype.watch // watched for property value change and triggers a function, watchdog
+         var o = { p: 1 };
+       o.watch('p', function (id, oldval, newval) {
+              console.log('o.' + id + ' changed from ' + oldval + ' to ' + newval);
+              return newval;
+              });
+       o.p = 2; o.p = 3;
+       delete o.p;
+       o.p = 4;
+       o.unwatch('p');
+       o.p = 5;
+       Output: 
+         o.p changed from 1 to 2
+         o.p changed from 2 to 3
+         o.p changed from undefined to 4
+        
+
+
+
+
+ 
+
  
  
  
