@@ -12,15 +12,25 @@ All other values are objects
   Functions are always objects
   Objects are always objects
 ---------------------Using Object prototype-----------------------------------------------------------------------  
-  function person(first, last, age, eye) { //a constructor
+function person(first, last, age, eye) {
     this.firstName = first;
     this.lastName = last;
     this.age = age;
     this.eyeColor = eye;
 }
+person.prototype.nationality = "English"; 
 var myFather = new person("John", "Doe", 50, "blue");
+var lol = {};
+lol.boobs = "boobs";
 
-prototype: person.prototype.nationality = "English"; // adding a new property to constructor
+document.write(myFather.firstName + " is " + myFather.nationality);
+document.write("\nHe has " + lol.boobs);
+document.write(JSON.stringify(Object.entries(myFather)));
+
+Output: John is English He has boobs[["firstName","John"],["lastName","Doe"],["age",50],["eyeColor","blue"]]
+
+so we can see that adding an property to object is direct, adding property to function in prototype level, not the original object , we can 
+see from Object.entries() do not include nationality
 ----------------------Equality--------------------------------------------------------------------
 two object with same parameter and values are not same, one object is only equal to itself. 
 two primitive type with same value is equal to each other 
@@ -121,8 +131,13 @@ Strict mode: disable hoisting
 ---------------------------------------------------------------------------------------------------------------------
 we can do wonderful things to the property of an object, like write only, read only, customise getter , setter. 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create
- ----------------------------------------------------------------------------------------------------------------
-  >var obj = {};
+ ---------------------property vs prototype property-------------------------------------------------------------------------------------------
+ Every JavaScript object has a prototype. The prototype is also an object.
+ 
+ Objects created using an object literal, or with new Object(), inherit from a prototype called Object.prototype.
+ Objects created with new Date() inherit the Date.prototype.
+ 
+ >var obj = {};
    Object.defineProperty(obj, "x", {value:0, writable:false});
    obj.x;
    >var obj = {}; var bValue = 30; 
@@ -230,7 +245,17 @@ console.log((function(a, b)    {}).length); /* 2 etc. */
  exceptions: 
   console.log((function(...args) {}).length); // 0
   console.log((function(a, b = 1, c) {}).length); // parameter with default value and everything after is not counted
------------------------------function.bind()--------------------------------------------------------------------------------------
+  
+ ----------------------- Arity (arguments.length)-------------------------------
+ function pair(x, y) {
+    if (arguments.length !== 2) {
+        throw new Error('Need exactly 2 arguments');
+    }
+    ...
+}
+------------------------Array-like-objects------------------------------------------------
+
+-----------------------------function.bind()--variable------------------------------------------------------------------------------------
   it is over complex, good to know, can be used like tags in java
   example 1: 
    this.x = 9;    // this refers to global "window" object here in the browser
@@ -241,20 +266,26 @@ console.log((function(a, b)    {}).length); /* 2 etc. */
 
 // New programmers might confuse the global var x with module's property x
  var boundGetX = retrieveX.bind(module); boundGetX(); // returns 81
- ---------------function.bind()-------------------------------
+ ---------------function.bind()--proto property-----------------------------
  function LateBloomer() { this.petalCount = Math.floor(Math.random() * 12) + 1;}
-// adding a property to LateBloomer
+// adding a proto property to LateBloomer
 LateBloomer.prototype.bloom = function() {
   window.setTimeout(this.declare.bind(this), 1000);
 };
-// Adding another property to lateblomer which is already been binded by 'bloom' 
+// Adding another proto property to lateblomer which is already been binded by 'bloom' 
 LateBloomer.prototype.declare = function() {
   console.log('I am a beautiful flower with ' +
     this.petalCount + ' petals!');
 };
 var flower = new LateBloomer();
 flower.bloom();  // after 1 second, triggers the 'declare' method
------------------------------------------------------------------------------------------------------------------
+--------------------function.bind()--Create Shortcut-------------------------------------------------------------------------------------------
+           var lul = Array.prototype.slice; lul.apply(arguments);
+ the 'apply' thing can be further minimized if we create a shortcut
+           var lool = Array.prototype.slice;
+           var shortcutSliceApply = Function.prototype.apply.bind(lool); shortcutSliceApply(arguments);
+ 
+ --------------------------------------------------------------------------------
  
  
  
