@@ -1,7 +1,27 @@
 ECMAScript is the name used by the language specification.ECMAScript is the official name for JavaScript.  ECMAScript 6 is currently being developed.
+Primitive values are booleans, numbers, strings, null, and undefined.
+All other values are objects
+
+All numbers in JavaScript are floating-point. error in number is either a NaN or infinity. 
+ >isNumber(''xyz)= NaN , > 3/0= infinity , >Math.pow(2,1024) = infinity (number too large)
+
+undefined means “no value.” Uninitialized variables are undefined: var foo; 
+                            Missing parameters are undefined: function f(x) { return x }
+                                                              > f() : undefined
+                           Reading a nonexistent property is undefined: > var obj = {}; // empty object
+                                                                        > obj.foo: undefined
+null means “no object.” It is used as a nonvalue whenever an object is expected (parameters, last in a chain of objects, etc.).
+Best way to check for undefined, null, false, 0, NaN, '' is if(!x) where x is a variable. All these 6 cases returns false. 
+ 
+two object with same parameter and values are not same, one object is only equal to itself. 
+two primitive type with same value is equal to each other 
+double equals will perform a type conversion when comparing two things;
+triple equals will do the same comparison without type conversion (by simply always returning false if the types differ);
 
 A single equals sign (=) is used to assign a value to a variable.
-A triple equals sign (===) is used to compare two values
+double equals(==) will perform a type conversion when comparing two things;
+A triple equals sign (===) compare without type conversion (by simply always returning false if the types differ);
+                ===, !==, ==, !=
 Declares (creates) a variable foo: var foo;
 Assigning variable value: foo = 4; var lul = 5;
 Compound assignment: x += 1;
@@ -25,5 +45,25 @@ JavaScript has two different ways to do if-then-else
  import in instanceof interface let new null package private protected public return
  static super switch this throw true try typeof var void while Infinity NaN undefined
  
- value.propKey => var str = 'abc'; str.length;  eller 'abc'.length;
+ value.propKey => var str = 'abc'; str.length;  eller 'abc'.length; eller 'abc'.toUpperCase
+ object declaration: var object = {};
+ Inserting a property to an object: object.foo= 24.5;
+ typeof null returning 'object'
+    
+ value instanceof Constr : shortcut for constructor
+     var b = new Bar();  // object created by constructor Bar
+     > b instanceof Bar :true
+     > {} instanceof Object :true
+     > [] instanceof Array :true
+     > [] instanceof Object : true
+     > undefined instanceof Object : false
+     > null instanceof Object :false
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
  
