@@ -1,1 +1,17 @@
 
+angular: 
+  component: a class that includes UI template
+  directive: perform code action on components
+  service: a class with business logics, injected into component
+  pipe: transformer function - object/value in - do action- modified object out
+  module: a class that lists all the components mentioned above and deployable
+  decorator: holds metadata and headers and html css locations, what to render how to render
+  **an angular class has at least one module, module has decorator @NgModule
+  
+  use angular cli to start developmnet , create new project, ng generate ... or ng g ... is same. 
+  
+  
+  
+
+  
+ 
