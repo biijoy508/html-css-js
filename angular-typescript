@@ -48,6 +48,24 @@ persons[0] = new Person();
  } 
  ----------------------------------------------------------------------------
   
+{} on the left of equal sign means destruction 
+say a function lol has properties age, name, height, weight, but now we only want name 
+let {name} = lol();
+----------------------------------------------------------
+npm install typescript-g (installing typescript)
+if tsconfig.json is not configured:
+tsc --t ES5 main.ts (compiling typescript file in ES5 guidelines)
+tsconfig.jso looks like : 
+{
+"compilerOptions":{
+"target" : "ES5,
+"module" : "commonjs",
+"experimentalallocators":true
+}}
+------------------------------------------------------------
+it is possible to install new types in ts
+------------------------
+
 
   
  
