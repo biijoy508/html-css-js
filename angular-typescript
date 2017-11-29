@@ -9,6 +9,21 @@ angular:
   **an angular class has at least one module, module has decorator @NgModule
   
   use angular cli to start developmnet , create new project, ng generate ... or ng g ... is same. 
+  typescript we can declare type, also we can avoid declaing type or namn 
+  .ts is typescript compilation, 
+  let getName = () => 'john'; console.log('my name is ' + getName); // týpe script annonymous function 
+  class Person{
+  constructor(public firstname: string , public lastname:string, private __age:number){} // in ts private varible name have underscore
+  }
+  }
+  var p = new Person("a", "good", 6); console.log(p.firstName);
+  var persons: Array<Person> = [];
+persons[0] = new Person();
+ 
+ class Employee extends person {
+ lol: string;
+ }
+  
   
   
   
