@@ -24,8 +24,29 @@ persons[0] = new Person();
  lol: string;
  }
   
-  
-  
+ interface Aperson(){
+  firstName : string;
+  age?: number; // ? means this varibale is optional
+  increaseHeight(currentHeight : number) : void{}
+ } 
+ ---------------------------------------------------------------------------------
+ class Person {
+ constructor(public config: Aperson){} //this is a way to implement interface
+ }
+ var lol : Aperson = {
+ firstName = "khan"; age = 10;
+ }
+ 
+ var p = new Person(lol);
+ ---------------------------------------------------------------------------------
+  class person implements Aperson{
+  firstName : string;
+  age?: number; // ? means this varibale is optional
+  increaseHeight(currentHeight : number) : void{
+  console.log("Here is a lol");
+  }
+ } 
+ ----------------------------------------------------------------------------
   
 
   
