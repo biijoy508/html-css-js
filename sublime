@@ -1,0 +1,12 @@
+cltr -p 
+viwe -> show console 
+First, to get the most out of autocomplete, install Package Control, restart, then install SublimeCodeIntel and restart.  
+Next, go to Preferences -> Settings - User and add the following (remove the last comma if it's the last entry in the array):
+
+"auto_complete": true,
+"auto_complete_commit_on_tab": true,
+"auto_complete_selector": "source, meta.tag", // you can make this "source - comment, meta.tag" if you don't want autocomplete in comments
+"auto_complete_triggers": [
+    {"selector": "text.html", "characters": "<"},
+    {"selector": "source, text.html", "characters": "."}
+],
