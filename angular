@@ -1,0 +1,247 @@
+ng-app , ng-init, ng-controller
+ng-model
+ng-bind
+{{expression}}
+
+ng-hide
+------------------------------------------------
+div ng-app="" ng-init="name='monster'">
+  <p>Name: <input type="text" ng-model="name"></p>
+  <p ng-bind="name"></p> //data binding
+   <p> example expression {{5+5}} belongs to {{name}}</p> //expression and databinding
+</div>
+-------------------------------------------------
+ 
+angular.module('ng-appname Name', [])
+module.controller('ng-controller Name', function($scope){}) // the $scope is a reserved word, can not replace with words like 'lol'.
+
+<div ng-app="myApp" ng-controller="myCtrl">
+First Name: <input type="text" ng-model="firstName"><br>
+Last Name: <input type="text" ng-model="lastName"><br>
+Full Name: {{firstName + " " + lastName}}
+</div>
+<script> var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {          //app.controller
+    $scope.firstName= "John";
+    $scope.lastName= "Doe";
+}); </script>
+------------------------------------------------
+aj objekt
+<div ng-app="" ng-init="person={firstName:'John',lastName:'Doe'}">
+<p>The name is {{ person.lastName }}</p>
+
+aj array
+<div ng-app="" ng-init="points=[1,15,19,2,40]">
+<p>The third result is {{ points[2] }}</p>
+-------------------------------------------------
+<div ng-app="myApp" w3-test-directive></div>
+<script>
+var app = angular.module("myApp", []);
+app.directive("w3TestDirective", function() {             //app.directive
+    return {
+        template : "I was made in a directive constructor!"
+    };
+});
+</script>
+----------------------------------------------------
+root scope vs controller scope
+
+<body ng-app="myApp">
+<div ng-controller="myCtrl">
+    <h1>{{color}}</h1>
+</div>
+<h1>{{color}}</h1>
+
+<script>
+var app = angular.module('myApp', []);
+app.run(function($rootScope) {   // $rootScope is a reserved keyword, app.run is the root controller we can say casually
+    $rootScope.color = 'blue';
+});
+app.controller('myCtrl', function($scope) {
+    $scope.color = "red";
+});
+</script>
+</body>
+-----------------------------------------------------
+ng-repeat example from an array
+<div ng-app="myApp" ng-controller="myCtrl">
+<ul><li ng-repeat="x in names">{{x}}</li></ul></div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) { $scope.names = ["Emil", "Tobias", "Linus"]; });
+</script>
+----------------------------------------------------
+angular filters 
+<p>The name is {{ lastName | uppercase }}</p>
+-----------------------
+using aj array, ng-repeat, filters together
+
+<div ng-app="myApp" ng-controller="namesCtrl">
+<p>Looping with objects:</p>
+<ul><li ng-repeat="x in names | orderBy:'country' | filter : 'i'">
+    {{ x.name + ', ' + x.country }}
+    </li>
+</ul></div>
+
+<script>
+angular.module('myApp', []).controller('namesCtrl', function($scope) {
+    $scope.names = [
+        {name:'Jani',country:'Norway'},
+        {name:'Carl',country:'Sweden'},
+        {name:'Margareth',country:'England'},
+        ];
+});
+</script>
+---------------------------------------------
+<div ng-app="myApp" ng-controller="namesCtrl">
+<table border="1" width="100%">
+<tr> <th ng-click="orderByMe('name')">Name</th> <th ng-click="orderByMe('country')">Country</th> </tr>
+<tr ng-repeat="x in names | orderBy:myOrderBy"> <td>{{x.name}}</td> <td>{{x.country}}</td> </tr>
+</table> </div>
+
+<script>
+angular.module('myApp', []).controller('namesCtrl', function($scope) {
+    $scope.names = [
+        {name:'Jani',country:'Norway'},
+        {name:'Carl',country:'Sweden'},
+       ];
+    $scope.orderByMe = function(x) {$scope.myOrderBy = x;}});</script>
+
+Here we are using method call to another method from method with parameter x. everytime table header is clicked the $socpe.orderbyme is invoked.
+----------------------------------------------------------------------
+<ul ng-app="myApp" ng-controller="namesCtrl"> <li ng-repeat="x in names">{{x | myFormat}}</li></ul>
+<script>
+var app = angular.module('myApp', []);
+app.filter('myFormat', function() {
+       return function(x) {
+        var c= ""; c= x[0]; c= c.toUpperCase(); 
+        return c; };
+});
+app.controller('namesCtrl', function($scope) {$scope.names = ['Jani','Carl',];});</script>
+
+using app.filter to create a custom filter that makes the first alphabet of a word into capital letter and .
+---------------------------------------------------------------------------
+AngularJS has about 30 built-in services. One of them is the $location service. it is services and directives that we use to do miracles. 
+app.controller('myCtrl', function($scope, $location) { //put the service name in the parameters
+    $scope.myUrl = $location.absUrl(); //using the service. 
+});
+-----------------------------------------------------------
+creating own service 
+app.service('hexafy', function() {this.myFunc = function (x) { return x.toString(16); }});
+
+using it 
+app.controller('myCtrl', function($scope, hexafy) {$scope.hex = hexafy.myFunc(255);});
+----------------------------------------------------------------
+selfmade filter using the selfmade service
+
+app.filter('myFormat',['hexafy', function(hexafy) {
+    return function(x) {
+        return hexafy.myFunc(x);
+    };
+}]);
+
+<li ng-repeat="x in counts">{{x | myFormat}}</li>
+----------------------------------------------------------------------
+example of using $http service together with scope variables and style
+
+<style>
+table, th , td  { border: 1px solid grey; border-collapse: collapse; padding: 5px; }
+table tr:nth-child(odd) { background-color: #f1f1f1; }
+table tr:nth-child(even) { background-color: #ffffff; }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+<table>
+  <tr ng-repeat="x in names"> <td>{{ x.Name }}</td> <td>{{ x.Country }}</td> </tr>
+</table>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {$http.get("customers.php").then(function (response) {$scope.names = response.data.records;});});
+</script>
+--------------------------------------------------------------
+binding model data with object elements, model is mostly used in input type fields.
+
+<div ng-app="myApp" ng-controller="myCtrl">
+<select ng-model="selectedCar" ng-options="x for (x, y) in cars"></select> // shows car1, car2 ..
+<select ng-model="selectedCar" ng-options="y for (x, y) in cars"></select> // shows ford, volvo ..
+
+app.controller('myCtrl', function($scope) {
+    $scope.cars = {
+        car01 : "Ford",
+        car02 : "Fiat",
+        car03 : "Volvo"
+    }
+});
+----------------------------------------------------------------
+ng-view for html from the same page, single page app
+
+<body ng-app="myApp">
+<p><a href="#/!">Main</a></p>
+<a href="#!banana">Banana</a>
+<a href="#!tomato">Tomato</a>
+<div ng-view></div>
+
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        template : "<h1>Main</h1><p>Click on the links to change this content</p>" // we are using only template instead of template url
+    })
+    .when("/banana", {
+        template : "<h1>Banana</h1><p>Bananas contain around 75% water.</p>"
+    })
+    .when("/tomato", {
+        template : "<h1>Tomato</h1><p>Tomatoes contain around 95% water.</p>"
+    });
+});
+</script>
+-----------------------------------------------
+ng-view a regular route for html from other files , single page app.
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+<body ng-app="myApp">
+
+<p><a href="#/!">Main</a></p>
+
+<a href="#!london">City 1</a>
+<a href="#!paris">City 2</a>
+
+<div ng-view></div>
+
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "main.htm", //gets html from this page
+    })
+    .when("/london", {
+        templateUrl : "london.htm",
+        controller : "londonCtrl"
+    })
+    .when("/paris", {
+        templateUrl : "paris.htm",
+        controller : "parisCtrl"
+    });
+});
+app.controller("londonCtrl", function ($scope) {
+    $scope.msg = "I love London";
+});
+app.controller("parisCtrl", function ($scope) {
+    $scope.msg = "I love Paris";
+});
+
+</script>
+----------------------------------------------------------------
+counting copy-paste, frustrated lover
+
+<body ng-app=""><input ng-paste="count = count + 1" ng-init="count=0" value="Paste text here!" /> <p>Text has been pasted {{count}} times.</p>
+-----------------------------------------
+
+
+
